@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+html{font-size:clamp(16px,calc(.4vw + 10px),22px)}
+body{background:#050816;color:#e6ecff;font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden}
+:focus-visible{outline:2px solid #22d3ee;outline-offset:3px}
+.bg-fx{position:fixed;inset:0;z-index:-1;background:radial-gradient(60% 50% at 80% 8%,rgba(99,102,241,.22),transparent 70%),radial-gradient(50% 40% at 8% 40%,rgba(34,211,238,.09),transparent 70%),radial-gradient(40% 40% at 70% 95%,rgba(217,70,239,.08),transparent 70%)}
+.bg-fx::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(148,163,184,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.06) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000,transparent 75%);mask-image:radial-gradient(ellipse at 50% 20%,#000,transparent 75%)}
+.glass{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.grad{background:linear-gradient(90deg,#22d3ee,#6366f1 55%,#d946ef);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:9999px;padding:.95rem 1.8rem;font-weight:600;transition:transform .25s ease-out,box-shadow .3s,border-color .3s}
+.btn.primary{background:linear-gradient(90deg,#22d3ee,#6366f1);color:#050816}
+.btn.primary:hover{box-shadow:0 0 36px rgba(99,102,241,.55)}
+.btn.ghost{border:1px solid rgba(255,255,255,.22)}
+.btn.ghost:hover{border-color:#22d3ee}
+.stage{perspective:900px}
+.rig{transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
+.layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transform:translateZ(calc(var(--i)*8px));transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.card:hover .layer{transform:translateZ(calc(var(--i)*34px))}
+.px{animation:wave 2.4s ease-in-out infinite;animation-delay:calc(var(--d)*.09s)}
+.card:hover .px{animation-duration:1s}
+@keyframes wave{0%,100%{transform:scale(.3);opacity:.3}50%{transform:scale(1);opacity:1}}
+@keyframes drift{50%{transform:translateY(-8px)}}
+.bg-fx::after{animation:gm 40s linear infinite}
+@keyframes gm{to{background-position:64px 64px}}
+.btn{border-radius:.6rem}
+.link{position:relative}
+.link::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:100%;background:#22d3ee;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.link:hover::after{transform:scaleX(1)}
+.tilt{position:relative;overflow:hidden;transform:perspective(1000px) rotateX(calc(var(--rx,0deg)*.4)) rotateY(calc(var(--ry,0deg)*.4));transition:transform .25s ease-out,border-color .3s}
+.tilt::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(99,102,241,.16),transparent 45%)}
+.tilt:hover::before{opacity:1}
+.plates{position:relative;height:100%;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-30deg);animation:spinp 18s ease-in-out infinite alternate}
+.plate{position:absolute;inset:18%;border:1px solid rgba(125,211,252,.35);background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(139,92,246,.1));transform:translateZ(calc(var(--i)*46px))}
+@keyframes spinp{to{transform:rotateX(58deg) rotateZ(10deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}}
+.tilt:hover{transform:perspective(1000px) translateY(-6px) rotateX(calc(var(--rx,0deg)*.4)) rotateY(calc(var(--ry,0deg)*.4));box-shadow:0 24px 60px -24px rgba(99,102,241,.5)}
+.plate{transition:border-color .6s,background .6s}
+.plate.on{border-color:rgba(34,211,238,.9);background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(139,92,246,.2))}
+@keyframes dash{to{stroke-dashoffset:-16}}
+@keyframes ping{0%{transform:scale(1);opacity:.9}100%{transform:scale(4);opacity:0}}
